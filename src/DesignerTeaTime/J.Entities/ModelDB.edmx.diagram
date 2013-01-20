@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="454f9d3804374b4e975c99241aea007f" Name="Diagram1" DisplayType="true" ZoomLevel="106">
+        <EntityTypeShape EntityType="ModelDB.Address" Width="3" PointX="4.5" PointY="4.875" />
+        <EntityTypeShape EntityType="ModelDB.DesignWork" Width="3" PointX="8.5" PointY="5.375" />
+        <EntityTypeShape EntityType="ModelDB.MaterialPriceLog" Width="3" PointX="8.5" PointY="1.875" />
+        <EntityTypeShape EntityType="ModelDB.Material" Width="3" PointX="4.75" PointY="1.625" />
+        <EntityTypeShape EntityType="ModelDB.MaterialType" Width="3" PointX="1" PointY="1.875" />
+        <EntityTypeShape EntityType="ModelDB.OrderDetail" Width="3" PointX="16" PointY="6.875" />
+        <EntityTypeShape EntityType="ModelDB.Order" Width="3" PointX="12.25" PointY="4.75" />
+        <EntityTypeShape EntityType="ModelDB.SingleLogin" Width="3" PointX="4.5" PointY="9" />
+        <EntityTypeShape EntityType="ModelDB.User" Width="3" PointX="0.75" PointY="6.25" />
+        <AssociationConnector Association="ModelDB.addresses_ibfk_1" />
+        <AssociationConnector Association="ModelDB.designworks_ibfk_1" />
+        <AssociationConnector Association="ModelDB.designworks_ibfk_2" />
+        <AssociationConnector Association="ModelDB.orders_ibfk_1" />
+        <AssociationConnector Association="ModelDB.materialpricelogs_ibfk_1" />
+        <AssociationConnector Association="ModelDB.materials_ibfk_1" />
+        <AssociationConnector Association="ModelDB.orderdetails_ibfk_1" />
+        <AssociationConnector Association="ModelDB.singlelogin_ibfk_1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
