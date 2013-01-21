@@ -4,13 +4,20 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+@*    @Styles.Render("~/Static/css")*@
+	@Styles.Render("~/Static/jquery-ui/css/files")
+	@Styles.Render("~/Static/bootstrap/css/files")
+
+
+    @Scripts.Render("~/Static/modernizr/files")
+    @Scripts.Render("~/Static/jquery/files")
+    @Scripts.Render("~/Static/jquery-ui/js/files")
+    @Scripts.Render("~/Static/jquery.validate/files")
+    @Scripts.Render("~/Static/bootstrap/js/files")
 </head>
 <body>
     @RenderBody()
 
-    @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
 </body>
 </html>
