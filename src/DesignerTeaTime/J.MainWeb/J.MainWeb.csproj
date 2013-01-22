@@ -132,12 +132,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Static\bootstrap\css\bootstrap-responsive.css" />
-    <Content Include="Static\bootstrap\css\bootstrap-responsive.min.css" />
-    <Content Include="Static\bootstrap\css\bootstrap.css" />
-    <Content Include="Static\bootstrap\css\bootstrap.min.css" />
-    <Content Include="Static\bootstrap\images\glyphicons-halflings-white.png" />
-    <Content Include="Static\bootstrap\images\glyphicons-halflings.png" />
     <Content Include="Static\jquery-ui\css\jquery-ui.css" />
     <Content Include="Static\jquery-ui\images\animated-overlay.gif" />
     <Content Include="Static\jquery-ui\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -157,8 +151,8 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <None Include="Static\jquery\jquery-1.9.0.intellisense.js" />
-    <Content Include="Static\bootstrap\js\bootstrap.js" />
-    <Content Include="Static\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Static\jquery.layout\jquery.layout.js" />
+    <Content Include="Static\jquery.layout\jquery.layout.min.js" />
     <Content Include="Static\jquery\jquery-1.9.0.js" />
     <Content Include="Static\jquery\jquery-1.9.0.min.js" />
     <Content Include="Static\jquery\jquery-1.9.0.min.map" />
@@ -168,6 +162,7 @@
     <Content Include="Static\jquery.validate\jquery.validate.js" />
     <Content Include="Static\jquery.validate\jquery.validate.min.js" />
     <Content Include="Static\modernizr\modernizr-2.6.2.js" />
+    <Content Include="Static\reset.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -175,7 +170,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Static\Site.css" />
+    <Content Include="Static\site.css" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\bullet.png" />
     <Content Include="Images\heroAccent.png" />

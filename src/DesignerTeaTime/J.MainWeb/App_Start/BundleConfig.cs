@@ -22,18 +22,17 @@ namespace J.MainWeb
 			bundles.Add(new ScriptBundle("~/Static/modernizr/files").Include(
 						"~/Static/modernizr/modernizr-*"));
 
-			bundles.Add(new StyleBundle("~/Static/css").Include("~/Static/site.css"));
+			bundles.Add(new StyleBundle("~/Static/css").Include(
+						"~/Static/reset.css",
+						"~/Static/site.css"));
 
 			bundles.Add(new StyleBundle("~/Static/jquery-ui/css/files").Include(
 						"~/Static/jquery-ui/css/jquery-ui*"));
 
 
-			bundles.Add(new ScriptBundle("~/Static/bootstrap/js/files").Include(
-						"~/Static/bootstrap/js/bootstrap*"));
+			bundles.Add(new ScriptBundle("~/Static/jquery.layout/files").Include(
+						"~/Static/jquery.layout/jquery.layout*"));
 
-			bundles.Add(new StyleBundle("~/Static/bootstrap/css/files").Include(
-						"~/Static/bootstrap/css/bootstrap.css",
-						"~/Static/bootstrap/css/bootstrap-responsive.css"));
 		}
 	}
 }

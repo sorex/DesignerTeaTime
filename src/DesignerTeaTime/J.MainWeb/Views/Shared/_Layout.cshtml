@@ -1,23 +1,27 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
-@*    @Styles.Render("~/Static/css")*@
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width" />
+	<title>@ViewBag.Title</title>
+	@Styles.Render("~/Static/css")
 	@Styles.Render("~/Static/jquery-ui/css/files")
-	@Styles.Render("~/Static/bootstrap/css/files")
 
+	@Scripts.Render("~/Static/modernizr/files")
+	@Scripts.Render("~/Static/jquery/files")
+	@Scripts.Render("~/Static/jquery-ui/js/files")
+	@Scripts.Render("~/Static/jquery.validate/files")
+	@Scripts.Render("~/Static/jquery.layout/files")
 
-    @Scripts.Render("~/Static/modernizr/files")
-    @Scripts.Render("~/Static/jquery/files")
-    @Scripts.Render("~/Static/jquery-ui/js/files")
-    @Scripts.Render("~/Static/jquery.validate/files")
-    @Scripts.Render("~/Static/bootstrap/js/files")
+	@RenderSection("head", required: false)
 </head>
 <body>
-    @RenderBody()
-
-    @RenderSection("scripts", required: false)
+	<div class="top_nav"></div>
+	@RenderSection("top", required: false)
+	<div id="body">
+		@RenderBody()
+	</div>
+	<div class="footer_info"></div>
+	@RenderSection("scripts", required: false)
 </body>
 </html>
