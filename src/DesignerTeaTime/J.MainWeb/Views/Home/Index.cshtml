@@ -5,44 +5,43 @@
 
 }
 
-<div id="A"></div>
-<div id="B"></div>
-<div id="C"></div>
-<div id="D"></div>
-<div id="E" style="border-width"></div>
+<div id="A" style="height: 50px; width: 50px; background-color: #ff0000; opacity: 0.4; z-index: 1;"></div>
+<div id="B" style="height: 105px; width: 100px; background-color: #00ff00;"></div>
+<div id="C" style="height: 50px; width: 50px; background-color: #0000ff;"></div>
+<div id="D" style="height: 50px; width: 100px; background-color: #ffff00;"></div>
+<div id="E" style="height: 50px; width: 50px; background-color: #00ffff; border: 5px solid red; padding: 7px; margin: 20px;">a</div>
 
 @section scripts{
 
 	<script type="text/javascript">
-		$(function ()
-		{
-			var BodyPostion = [
-				{ id: "A", top: 0, left: 0, height: 50, width: 50, borderWidth: 1, color: "#ff0000" },
-				{ id: "B", top: 0, left: 55, height: 105, width: 100, borderWidth: 1, color: "#00ff00" },
-				{ id: "C", top: 55, left: 0, height: 50, width: 50, borderWidth: 1, color: "#0000ff" },
-				{ id: "D", top: 110, left: 0, height: 50, width: 100, borderWidth: 1, color: "#ffff00" },
-				{ id: "E", top: 110, left: 105, height: 50, width: 50, borderWidth: 1, color: "#00ffff" }
-			];
-
+		$(function () {
 			$("#body").css("background-color", "#000000");
 
-			var MaxHeight = 0;
+			var $body = $("#body"),
+				bodyOffset = $body.offset(),
+				MaxHeight = 0;
 
-			for (var i = 0, len = BodyPostion.length; i < len; i++)
-			{
+			var BodyPostion = [
+				{ id: "A", top: 0, left: 0 },
+				{ id: "B", top: 0, left: 55 },
+				{ id: "C", top: 25, left: 0 },
+				{ id: "D", top: 110, left: 0 },
+				{ id: "E", top: 110, left: 105 }
+			];
+
+			for (var i = 0, len = BodyPostion.length; i < len; i++) {
 				var d = BodyPostion[i],
-					tempTop = -document.getElementById(d.id).offsetTop + d.top,
-					tempLeft = -document.getElementById(d.id).offsetLeft + d.left;
+					$d = $("#" + d.id),
+					dOffset = $d.offset(),
+					tempMaxHeight = d.top + $d.outerHeight();
 
-				tempMaxHeight = d.top + d.height + 2 * borderWidth
 				if (MaxHeight < tempMaxHeight)
 					MaxHeight = tempMaxHeight;
 
-				//alert(tempTop + ":" + tempLeft);
-				$("#" + d.id).css({ position: "relative", top: tempTop, left: tempLeft, height: d.height, width: d.width, "background-color": d.color });
+				$d.css({ position: "relative", top: bodyOffset.top - dOffset.top + d.top, left: bodyOffset.left - dOffset.left + d.left });
 			}
 
-			$("#body").css("height", MaxHeight);
+			$body.css("height", MaxHeight);
 		});
 	</script>
 }
