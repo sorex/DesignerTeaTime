@@ -14,8 +14,8 @@ namespace J.MainWeb.Controllers
 
 		public ActionResult Index()
 		{
-			logger.Log(LogLevel.Debug, "this is a testA");
-			logger.Log(LogLevel.Debug, "this is a testB");
+			//logger.Log(LogLevel.Debug, "this is at MainWeb Error");
+			//logger.Log(LogLevel.Debug, "this is a testB");
 			return View();
 		}
 	}

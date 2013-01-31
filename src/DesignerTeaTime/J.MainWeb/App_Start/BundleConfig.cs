@@ -33,6 +33,9 @@ namespace J.MainWeb
 			bundles.Add(new ScriptBundle("~/Static/jquery.layout/files").Include(
 						"~/Static/jquery.layout/jquery.layout*"));
 
+			bundles.Add(new ScriptBundle("~/Static/extendjs/files").Include(
+						"~/Static/extendjs/extendjs*"));
+
 		}
 	}
 }

@@ -138,6 +138,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Static\extendjs\extendjs.js" />
     <Content Include="Static\jquery-ui\css\jquery-ui.css" />
     <Content Include="Static\jquery-ui\images\animated-overlay.gif" />
     <Content Include="Static\jquery-ui\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -158,6 +159,7 @@
     <Content Include="Global.asax" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
@@ -175,6 +177,7 @@
     <Content Include="Static\jquery.validate\jquery.validate.min.js" />
     <Content Include="Static\modernizr\modernizr-2.6.2.js" />
     <Content Include="Static\reset.css" />
+    <Content Include="Static\site\divLayout.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

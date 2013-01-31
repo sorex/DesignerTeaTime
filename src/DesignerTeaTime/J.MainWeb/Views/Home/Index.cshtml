@@ -26,31 +26,13 @@
 		$(function () {
 			$("#body").css("background-color", "#000000");
 
-			var $body = $("#body"),
-				bodyOffset = $body.offset(),
-				MaxHeight = 0;
-
-			var BodyPostion = [
+			$("#body").divLayout([
 				{ id: "A", top: 0, left: 0 },
 				{ id: "B", top: 0, left: 55 },
 				{ id: "C", top: 25, left: 0 },
 				{ id: "D", top: 110, left: 0 },
 				{ id: "E", top: 110, left: 105 }
-			];
-
-			for (var i = 0, len = BodyPostion.length; i < len; i++) {
-				var d = BodyPostion[i],
-					$d = $("#" + d.id),
-					dOffset = $d.offset(),
-					tempMaxHeight = d.top + $d.outerHeight();
-
-				if (MaxHeight < tempMaxHeight)
-					MaxHeight = tempMaxHeight;
-
-				$d.css({ position: "relative", top: bodyOffset.top - dOffset.top + d.top, left: bodyOffset.left - dOffset.left + d.left });
-			}
-
-			$body.css("height", MaxHeight);
+			]);
 		});
 	</script>
 }
