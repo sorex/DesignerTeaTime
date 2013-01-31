@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\DesignController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TempController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -140,6 +141,7 @@
   <ItemGroup>
     <Content Include="Images\homepage_checkmark.png" />
     <Content Include="Images\homepage_top.png" />
+    <Content Include="Images\homepage_top_base.png" />
     <Content Include="Static\extendjs\extendjs.js" />
     <Content Include="Static\jquery-ui\css\jquery-ui.css" />
     <Content Include="Static\jquery-ui\images\animated-overlay.gif" />
@@ -205,6 +207,7 @@
     <Content Include="Views\Temp\JQueryUI.cshtml" />
     <Content Include="Views\Temp\Index.cshtml" />
     <Content Include="Static\uploadify\jquery.uploadify-3.1.min.js.map" />
+    <Content Include="Views\Design\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
