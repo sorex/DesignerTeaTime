@@ -141,7 +141,6 @@
   <ItemGroup>
     <Content Include="Images\homepage_checkmark.png" />
     <Content Include="Images\homepage_top.png" />
-    <Content Include="Images\homepage_top_base.png" />
     <Content Include="Static\extendjs\extendjs.js" />
     <Content Include="Static\jquery-ui\css\jquery-ui.css" />
     <Content Include="Static\jquery-ui\images\animated-overlay.gif" />
@@ -180,6 +179,7 @@
     <Content Include="Static\jquery-ui\js\jquery-ui-1.10.0.min.js" />
     <Content Include="Static\jquery.validate\jquery.validate.js" />
     <Content Include="Static\jquery.validate\jquery.validate.min.js" />
+    <Content Include="Static\jquery\jquery-migrate-1.1.0.js" />
     <Content Include="Static\json2\json2.js" />
     <Content Include="Static\modernizr\modernizr-2.6.2.js" />
     <Content Include="Static\reset.css" />

@@ -44,7 +44,7 @@ String.prototype.trim = function ()
 	/// &#10;将会返回一个新字符串
 	/// </summary>
 	/// <returns type="String" />
-	return this.replace(/(^\s*)|(\s*$)|\r|\n/g, ""); 
+	return this.replace(/(^\s*)|(\s*$)|\r|\n/g, "");
 }
 
 String.prototype.trimLeft = function ()
