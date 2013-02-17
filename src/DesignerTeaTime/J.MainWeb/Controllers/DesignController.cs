@@ -6,15 +6,24 @@ using System.Web.Mvc;
 
 namespace J.MainWeb.Controllers
 {
-    public class DesignController : Controller
-    {
-        //
-        // GET: /Design/
+	public class DesignController : Controller
+	{
+		//
+		// GET: /Design/
 
-        public ActionResult Index()
-        {
-            return View();
-        }
+		public ActionResult Index()
+		{
+			return View();
+		}
 
-    }
+		[HttpPost]
+		public ActionResult CreateDesignWorks()
+		{
+			if (Request.IsAjaxRequest())
+			{
+
+			}
+			return View();
+		}
+	}
 }

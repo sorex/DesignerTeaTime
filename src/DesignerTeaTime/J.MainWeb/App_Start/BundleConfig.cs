@@ -11,9 +11,9 @@ namespace J.MainWeb
 
 			#region CSS
 			#region Site CSS
-			bundles.Add(new StyleBundle("~/Static/css").Include(
-						"~/Static/reset.css",
-						"~/Static/site.css"));
+			bundles.Add(new StyleBundle("~/Static/site/css/files").Include(
+						"~/Static/site/css/reset.css",
+						"~/Static/site/css/site.css"));
 			#endregion
 
 			#region jquery ui CSS
