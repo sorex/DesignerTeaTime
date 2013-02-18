@@ -42,16 +42,14 @@
 			.ValueGroup input[type="text"]
 			{
 				font: 18px "Microsoft Yahei",Verdana,Simsun,"Segoe UI","Segoe UI Web Regular","Segoe UI Symbol","Helvetica Neue","BBAlpha Sans","S60 Sans",Arial,"sans-serif";
-
-				line-height: 31px;
-				height: 31px;
+				line-height: 25px;
+				height: 25px;
 			}
 	</style>
 }
 @section top{
 
 }
-
 <div id="Show1" class="Show" style="background: #FF0000 url('/Images/short-sleeved_T_shirt_front.png') no-repeat center center; z-index: 1;">
 	<div id="ShowImage1"></div>
 </div>
@@ -79,26 +77,26 @@
 		<span>单件成本：</span><span id="basePrice">50.00</span><span>元/件</span><br />
 		<span>单件售价：</span><input type="text" id="sellingPrice" style="width: 60px" value="60.00" onchange="ComputerAnticipatedIncome();" /><span>元/件</span>
 	</div>
-	<div style="float: right; width: 230px; text-align: right;">
+	<div style="float: right; width: 230px; text-align: right;" title="显示的是总收益，需要扣除支付宝的手续费用，付款1.2%手续费，打款0.5%手续费（最低1元，最高25元）。">
 		<span>您的预计收益：</span><br />
 		<span id="anticipatedIncome" style="font: bold 48px arial;">500</span><span>元</span>
 	</div>
 </div>
 <div id="D" class="ValueGroup" style="height: 420px;">
-	<div>
+	<div title="给您的活动取个好辨识的标题吧。">
 		<span>活动标题：</span><input type="text" id="title" style="width: 320px;" />
-		<input type="button" onclick="$.formValueString(['title']);" value="test" />
+		<input type="button" onclick="test();" value="test" />
 	</div>
-	<div style="margin-top:5px;">
+	<div style="margin-top:5px;" title="您希望该活动的预售时长。">
 		<span>活动时长：</span>
 		<div id="longTime" style="display: inline-block;">
-			<input type="radio" id="time3" name="longTime" /><label for="time3">3天</label>
-			<input type="radio" id="time7" name="longTime" checked /><label for="time7">7天</label>
-			<input type="radio" id="time14" name="longTime" /><label for="time14">14天</label>
-			<input type="radio" id="time21" name="longTime" /><label for="time21">21天</label>
+			<input type="radio" id="time3" name="longTime" value="3" /><label for="time3">3天</label>
+			<input type="radio" id="time7" name="longTime" value="7" checked /><label for="time7">7天</label>
+			<input type="radio" id="time14" name="longTime" value="14" /><label for="time14">14天</label>
+			<input type="radio" id="time21" name="longTime" value="21" /><label for="time21">21天</label>
 		</div>
 	</div>
-	<div style="margin-top:5px;">
+	<div style="margin-top:5px;" title="给您的写点什么吧。它会显示到购买页面的说。">
 		<span>活动说明：</span><textarea id="description" style="height: 200px;"></textarea>
 	</div>
 </div>
@@ -110,6 +108,8 @@
 	<script type="text/javascript">
 		$(function ()
 		{
+			$(document).tooltip();
+
 			$("#frontUpload").uploadify({
 				'buttonText': '选择正面图案',
 				'fileTypeDesc': '图片文件',					//文件类型描述
@@ -188,6 +188,10 @@
 			}
 		}
 
-		function Get
+		function test()
+		{
+			$element = $("#cars");
+			alert($element);
+		}
 	</script>
 }

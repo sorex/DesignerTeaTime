@@ -81,7 +81,10 @@ CREATE TABLE `Materials` (
 `TypeID` varchar(200) NOT NULL COMMENT '类型\r\n1：短袖T恤\r\n2：长袖T恤\r\n3：背心\r\n4：连帽衫',
 `Name` varchar(200) NOT NULL COMMENT '原料编号',
 `Price` decimal(18,8) NOT NULL DEFAULT 0 COMMENT '目前均价',
-`State` tinyint NOT NULL COMMENT '状态\r\n0：停产\r\n1：正常\r\n2：缺货',
+`Description` varchar(5000) NULL,
+`Sizes` varchar(200) NULL COMMENT '逗号分隔',
+`PictureNumber` int NOT NULL COMMENT '需要上传图片张数',
+`State` tinyint NOT NULL COMMENT '状态\r\n0：停产\r\n1：正常\r\n2：缺货\r\n3：停用/未启用',
 PRIMARY KEY (`GUID`) 
 );
 
@@ -104,6 +107,7 @@ CREATE TABLE `MaterialTypes` (
 `GUID` varchar(200) NOT NULL,
 `ParentID` varchar(200) NULL,
 `Name` varchar(200) NOT NULL COMMENT '类型名称',
+`IsLeafNode` bit NULL DEFAULT b'1' COMMENT '是否是叶子节点',
 `State` tinyint NOT NULL COMMENT '状态\r\n0：停用\r\n1：正常\r\n',
 PRIMARY KEY (`GUID`) 
 );
@@ -111,8 +115,33 @@ PRIMARY KEY (`GUID`)
 CREATE TABLE `OrderDetails` (
 `GUID` varchar(200) NOT NULL,
 `OrderID` varchar(200) NOT NULL,
-`Sex` tinyint NULL COMMENT '性别',
 `Size` varchar(200) NULL COMMENT '尺码',
+`Number` int NULL COMMENT '购买数量',
+PRIMARY KEY (`GUID`) 
+);
+
+CREATE TABLE `MaterialColors` (
+`GUID` varchar(200) NOT NULL,
+`MaterialID` varchar(200) NOT NULL,
+`ColorName` varchar(200) NULL,
+`ColorCode` varchar(200) NOT NULL,
+`IsDefault` bit NOT NULL DEFAULT b'0' COMMENT '是否是默认颜色',
+`State` tinyint NOT NULL COMMENT '状态\r\n0：停产\r\n1：正常\r\n2：缺货',
+PRIMARY KEY (`GUID`) 
+);
+
+CREATE TABLE `MaterialPictures` (
+`GUID` varchar(200) NOT NULL,
+`MaterialColorID` varchar(200) NULL,
+`Name` varchar(200) NULL,
+`Index` int NULL,
+`FileName` varchar(200) NOT NULL,
+`Width` int NOT NULL,
+`Height` int NOT NULL,
+`Top` int NULL,
+`Left` int NULL,
+`UploadWidth` int NULL,
+`UploadHeight` int NULL,
 PRIMARY KEY (`GUID`) 
 );
 
@@ -125,4 +154,6 @@ ALTER TABLE `Materials` ADD FOREIGN KEY (`TypeID`) REFERENCES `MaterialTypes` (`
 ALTER TABLE `DesignWorks` ADD FOREIGN KEY (`MaterialID`) REFERENCES `Materials` (`GUID`);
 ALTER TABLE `OrderDetails` ADD FOREIGN KEY (`OrderID`) REFERENCES `Orders` (`GUID`);
 ALTER TABLE `Orders` ADD FOREIGN KEY (`DesignWorkID`) REFERENCES `DesignWorks` (`GUID`);
+ALTER TABLE `MaterialColors` ADD FOREIGN KEY (`MaterialID`) REFERENCES `Materials` (`GUID`);
+ALTER TABLE `MaterialPictures` ADD FOREIGN KEY (`MaterialColorID`) REFERENCES `MaterialColors` (`GUID`);
 

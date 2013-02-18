@@ -31,7 +31,7 @@ jQuery.fn.extend({
 });
 
 jQuery.extend({
-	formValueString:function(ids)
+	formValueObject:function(ids)
 	{
 		var valueList = [];
 		for (var i = 0; i < ids.length; i++)
@@ -51,38 +51,66 @@ jQuery.extend({
 					case "input":
 						switch ($element.attr("type"))
 						{
-							case "text":
-								break;
-							case "password":
-								break;
-							case "radio":
-								break;
-							case "checkbox":
-								break;
-							case "submit":
-								break;
-							case "image":
-								break;
 							case "reset":
-								break;
+							case "submit":
 							case "button":
 								break;
-							case "file":
-								break;
+							case "text":
+							case "password":
 							case "hidden":
+								valueList.push({ name: $element.attr("name"), value: $element.val() });
+								break;
+							case "radio":
+								valueList.push({ name: $element.attr("name"), value: $(":radio:checked[name='" + $element.attr("name") + "']").val() });
+								break;
+							case "checkbox":
+								var tempList = [];
+								$(":checkbox:checked[name='" + $element.attr("name") + "']").each(function ()
+								{
+									tempList.push(this.value);
+								});
+								valueList.push({ name: $element.attr("name"), value: tempList });
+								break;
+							case "image":
+							case "file":
 								break;
 							default:
 								break;
 						}
 						break;
 					case "select":
+						if ($element.attr("multiple") == "undefined")
+						{
+							valueList.push({ name: $element.attr("name"), value: $("option:selected", $element).val() });
+						}
+						else
+						{
+							var tempList = [];
+							$("option:selected", $element).each(function ()
+							{
+								tempList.push(this.value);
+							});
+							valueList.push({ name: $element.attr("name"), value: tempList });
+						}
 						break;
 					case "textarea":
+						valueList.push({ name: $element.attr("name"), value: $element.val() });
 						break;
 					default:
 						break;
 				}
 			}
 		}
+		valueList.sort(function (a, b)
+		{
+			//按name进行升序排列
+			return a.name > b.name ? 1 : -1
+		});
+		var valueObject = {};
+		for (var i = 0; i < valueList.length; i++)
+		{
+			valueObject[valueList[i].name] = valueList[i].value;
+		}
+		return valueObject;
 	}
 });
