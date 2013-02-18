@@ -27,6 +27,8 @@ namespace J.Entities
     
         public DbSet<Address> Addresses { get; set; }
         public DbSet<DesignWork> DesignWorks { get; set; }
+        public DbSet<MaterialColor> MaterialColors { get; set; }
+        public DbSet<MaterialPicture> MaterialPictures { get; set; }
         public DbSet<MaterialPriceLog> MaterialPriceLogs { get; set; }
         public DbSet<Material> Materials { get; set; }
         public DbSet<MaterialType> MaterialTypes { get; set; }

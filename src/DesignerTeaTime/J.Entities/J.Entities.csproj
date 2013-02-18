@@ -57,6 +57,12 @@
     <Compile Include="Material.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="MaterialColor.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MaterialPicture.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="MaterialPriceLog.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>

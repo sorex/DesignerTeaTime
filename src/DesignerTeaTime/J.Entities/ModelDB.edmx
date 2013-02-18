@@ -8,6 +8,8 @@
         <EntityContainer Name="ModelDBStoreContainer">
           <EntitySet Name="Addresses" EntityType="ModelDB.Store.Addresses" store:Type="Tables" Schema="designerteatimedb" />
           <EntitySet Name="DesignWorks" EntityType="ModelDB.Store.DesignWorks" store:Type="Tables" Schema="designerteatimedb" />
+          <EntitySet Name="MaterialColors" EntityType="ModelDB.Store.MaterialColors" store:Type="Tables" Schema="designerteatimedb" />
+          <EntitySet Name="MaterialPictures" EntityType="ModelDB.Store.MaterialPictures" store:Type="Tables" Schema="designerteatimedb" />
           <EntitySet Name="MaterialPriceLogs" EntityType="ModelDB.Store.MaterialPriceLogs" store:Type="Tables" Schema="designerteatimedb" />
           <EntitySet Name="Materials" EntityType="ModelDB.Store.Materials" store:Type="Tables" Schema="designerteatimedb" />
           <EntitySet Name="MaterialTypes" EntityType="ModelDB.Store.MaterialTypes" store:Type="Tables" Schema="designerteatimedb" />
@@ -26,6 +28,14 @@
           <AssociationSet Name="designworks_ibfk_2" Association="ModelDB.Store.designworks_ibfk_2">
             <End Role="Materials" EntitySet="Materials" />
             <End Role="DesignWorks" EntitySet="DesignWorks" />
+          </AssociationSet>
+          <AssociationSet Name="materialcolors_ibfk_1" Association="ModelDB.Store.materialcolors_ibfk_1">
+            <End Role="Materials" EntitySet="Materials" />
+            <End Role="MaterialColors" EntitySet="MaterialColors" />
+          </AssociationSet>
+          <AssociationSet Name="materialpictures_ibfk_1" Association="ModelDB.Store.materialpictures_ibfk_1">
+            <End Role="MaterialColors" EntitySet="MaterialColors" />
+            <End Role="MaterialPictures" EntitySet="MaterialPictures" />
           </AssociationSet>
           <AssociationSet Name="materialpricelogs_ibfk_1" Association="ModelDB.Store.materialpricelogs_ibfk_1">
             <End Role="Materials" EntitySet="Materials" />
@@ -86,6 +96,33 @@
           <Property Name="SendCost" Type="decimal" Precision="18" Scale="8" />
           <Property Name="CompletionTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="MaterialColors">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Name="GUID" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="MaterialID" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="ColorName" Type="varchar" MaxLength="200" />
+          <Property Name="ColorCode" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="IsDefault" Type="bit" Nullable="false" />
+          <Property Name="State" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MaterialPictures">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Name="GUID" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="MaterialColorID" Type="varchar" MaxLength="200" />
+          <Property Name="Name" Type="varchar" MaxLength="200" />
+          <Property Name="Index" Type="int" />
+          <Property Name="FileName" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="Width" Type="int" Nullable="false" />
+          <Property Name="Height" Type="int" Nullable="false" />
+          <Property Name="Top" Type="int" />
+          <Property Name="Left" Type="int" />
+          <Property Name="UploadWidth" Type="int" />
+          <Property Name="UploadHeight" Type="int" />
+        </EntityType>
         <EntityType Name="MaterialPriceLogs">
           <Key>
             <PropertyRef Name="GUID" />
@@ -103,6 +140,9 @@
           <Property Name="TypeID" Type="varchar" Nullable="false" MaxLength="200" />
           <Property Name="Name" Type="varchar" Nullable="false" MaxLength="200" />
           <Property Name="Price" Type="decimal" Nullable="false" Precision="18" Scale="8" />
+          <Property Name="Description" Type="varchar" MaxLength="5000" />
+          <Property Name="Sizes" Type="varchar" MaxLength="200" />
+          <Property Name="PictureNumber" Type="int" Nullable="false" />
           <Property Name="State" Type="tinyint" Nullable="false" />
         </EntityType>
         <EntityType Name="MaterialTypes">
@@ -112,6 +152,7 @@
           <Property Name="GUID" Type="varchar" Nullable="false" MaxLength="200" />
           <Property Name="ParentID" Type="varchar" MaxLength="200" />
           <Property Name="Name" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="IsLeafNode" Type="bit" />
           <Property Name="State" Type="tinyint" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderDetails">
@@ -120,8 +161,8 @@
           </Key>
           <Property Name="GUID" Type="varchar" Nullable="false" MaxLength="200" />
           <Property Name="OrderID" Type="varchar" Nullable="false" MaxLength="200" />
-          <Property Name="Sex" Type="tinyint" />
           <Property Name="Size" Type="varchar" MaxLength="200" />
+          <Property Name="Number" Type="int" />
         </EntityType>
         <EntityType Name="Orders">
           <Key>
@@ -210,6 +251,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="materialcolors_ibfk_1">
+          <End Role="Materials" Type="ModelDB.Store.Materials" Multiplicity="1" />
+          <End Role="MaterialColors" Type="ModelDB.Store.MaterialColors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materials">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="MaterialColors">
+              <PropertyRef Name="MaterialID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="materialpictures_ibfk_1">
+          <End Role="MaterialColors" Type="ModelDB.Store.MaterialColors" Multiplicity="0..1" />
+          <End Role="MaterialPictures" Type="ModelDB.Store.MaterialPictures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaterialColors">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="MaterialPictures">
+              <PropertyRef Name="MaterialColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="materialpricelogs_ibfk_1">
           <End Role="Materials" Type="ModelDB.Store.Materials" Multiplicity="0..1" />
           <End Role="MaterialPriceLogs" Type="ModelDB.Store.MaterialPriceLogs" Multiplicity="*" />
@@ -277,6 +342,8 @@
         <EntityContainer Name="DBEntities" p1:LazyLoadingEnabled="true">
           <EntitySet Name="Addresses" EntityType="ModelDB.Address" />
           <EntitySet Name="DesignWorks" EntityType="ModelDB.DesignWork" />
+          <EntitySet Name="MaterialColors" EntityType="ModelDB.MaterialColor" />
+          <EntitySet Name="MaterialPictures" EntityType="ModelDB.MaterialPicture" />
           <EntitySet Name="MaterialPriceLogs" EntityType="ModelDB.MaterialPriceLog" />
           <EntitySet Name="Materials" EntityType="ModelDB.Material" />
           <EntitySet Name="MaterialTypes" EntityType="ModelDB.MaterialType" />
@@ -299,6 +366,14 @@
           <AssociationSet Name="orders_ibfk_1" Association="ModelDB.orders_ibfk_1">
             <End Role="DesignWork" EntitySet="DesignWorks" />
             <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="materialcolors_ibfk_1" Association="ModelDB.materialcolors_ibfk_1">
+            <End Role="Material" EntitySet="Materials" />
+            <End Role="MaterialColor" EntitySet="MaterialColors" />
+          </AssociationSet>
+          <AssociationSet Name="materialpictures_ibfk_1" Association="ModelDB.materialpictures_ibfk_1">
+            <End Role="MaterialColor" EntitySet="MaterialColors" />
+            <End Role="MaterialPicture" EntitySet="MaterialPictures" />
           </AssociationSet>
           <AssociationSet Name="materialpricelogs_ibfk_1" Association="ModelDB.materialpricelogs_ibfk_1">
             <End Role="Material" EntitySet="Materials" />
@@ -359,6 +434,36 @@
           <NavigationProperty Name="Material" Relationship="ModelDB.designworks_ibfk_2" FromRole="DesignWork" ToRole="Material" />
           <NavigationProperty Name="Orders" Relationship="ModelDB.orders_ibfk_1" FromRole="DesignWork" ToRole="Order" />
         </EntityType>
+        <EntityType Name="MaterialColor">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Type="String" Name="GUID" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="MaterialID" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ColorName" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ColorCode" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="IsDefault" Nullable="false" />
+          <Property Type="SByte" Name="State" Nullable="false" />
+          <NavigationProperty Name="Material" Relationship="ModelDB.materialcolors_ibfk_1" FromRole="MaterialColor" ToRole="Material" />
+          <NavigationProperty Name="MaterialPictures" Relationship="ModelDB.materialpictures_ibfk_1" FromRole="MaterialColor" ToRole="MaterialPicture" />
+        </EntityType>
+        <EntityType Name="MaterialPicture">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Type="String" Name="GUID" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="MaterialColorID" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Name" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Index" />
+          <Property Type="String" Name="FileName" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Width" Nullable="false" />
+          <Property Type="Int32" Name="Height" Nullable="false" />
+          <Property Type="Int32" Name="Top" />
+          <Property Type="Int32" Name="Left" />
+          <Property Type="Int32" Name="UploadWidth" />
+          <Property Type="Int32" Name="UploadHeight" />
+          <NavigationProperty Name="MaterialColor" Relationship="ModelDB.materialpictures_ibfk_1" FromRole="MaterialPicture" ToRole="MaterialColor" />
+        </EntityType>
         <EntityType Name="MaterialPriceLog">
           <Key>
             <PropertyRef Name="GUID" />
@@ -377,8 +482,12 @@
           <Property Type="String" Name="TypeID" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Type="Decimal" Name="Price" Nullable="false" />
+          <Property Type="String" Name="Description" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Sizes" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="PictureNumber" Nullable="false" />
           <Property Type="SByte" Name="State" Nullable="false" />
           <NavigationProperty Name="DesignWorks" Relationship="ModelDB.designworks_ibfk_2" FromRole="Material" ToRole="DesignWork" />
+          <NavigationProperty Name="MaterialColors" Relationship="ModelDB.materialcolors_ibfk_1" FromRole="Material" ToRole="MaterialColor" />
           <NavigationProperty Name="MaterialPriceLogs" Relationship="ModelDB.materialpricelogs_ibfk_1" FromRole="Material" ToRole="MaterialPriceLog" />
           <NavigationProperty Name="MaterialType" Relationship="ModelDB.materials_ibfk_1" FromRole="Material" ToRole="MaterialType" />
         </EntityType>
@@ -389,6 +498,7 @@
           <Property Type="String" Name="GUID" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="ParentID" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="IsLeafNode" />
           <Property Type="SByte" Name="State" Nullable="false" />
           <NavigationProperty Name="Materials" Relationship="ModelDB.materials_ibfk_1" FromRole="MaterialType" ToRole="Material" />
         </EntityType>
@@ -398,8 +508,8 @@
           </Key>
           <Property Type="String" Name="GUID" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="OrderID" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Type="SByte" Name="Sex" />
           <Property Type="String" Name="Size" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Number" />
           <NavigationProperty Name="Order" Relationship="ModelDB.orderdetails_ibfk_1" FromRole="OrderDetail" ToRole="Order" />
         </EntityType>
         <EntityType Name="Order">
@@ -507,6 +617,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="materialcolors_ibfk_1">
+          <End Type="ModelDB.Material" Role="Material" Multiplicity="1" />
+          <End Type="ModelDB.MaterialColor" Role="MaterialColor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="MaterialColor">
+              <PropertyRef Name="MaterialID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="materialpictures_ibfk_1">
+          <End Type="ModelDB.MaterialColor" Role="MaterialColor" Multiplicity="0..1" />
+          <End Type="ModelDB.MaterialPicture" Role="MaterialPicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaterialColor">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="MaterialPicture">
+              <PropertyRef Name="MaterialColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="materialpricelogs_ibfk_1">
           <End Type="ModelDB.Material" Role="Material" Multiplicity="0..1" />
           <End Type="ModelDB.MaterialPriceLog" Role="MaterialPriceLog" Multiplicity="*" />
@@ -601,6 +735,35 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="MaterialColors">
+            <EntityTypeMapping TypeName="ModelDB.MaterialColor">
+              <MappingFragment StoreEntitySet="MaterialColors">
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="ColorCode" ColumnName="ColorCode" />
+                <ScalarProperty Name="ColorName" ColumnName="ColorName" />
+                <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+                <ScalarProperty Name="GUID" ColumnName="GUID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaterialPictures">
+            <EntityTypeMapping TypeName="ModelDB.MaterialPicture">
+              <MappingFragment StoreEntitySet="MaterialPictures">
+                <ScalarProperty Name="UploadHeight" ColumnName="UploadHeight" />
+                <ScalarProperty Name="UploadWidth" ColumnName="UploadWidth" />
+                <ScalarProperty Name="Left" ColumnName="Left" />
+                <ScalarProperty Name="Top" ColumnName="Top" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Index" ColumnName="Index" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MaterialColorID" ColumnName="MaterialColorID" />
+                <ScalarProperty Name="GUID" ColumnName="GUID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="MaterialPriceLogs">
             <EntityTypeMapping TypeName="ModelDB.MaterialPriceLog">
               <MappingFragment StoreEntitySet="MaterialPriceLogs">
@@ -615,6 +778,9 @@
             <EntityTypeMapping TypeName="ModelDB.Material">
               <MappingFragment StoreEntitySet="Materials">
                 <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="PictureNumber" ColumnName="PictureNumber" />
+                <ScalarProperty Name="Sizes" ColumnName="Sizes" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="TypeID" ColumnName="TypeID" />
@@ -626,6 +792,7 @@
             <EntityTypeMapping TypeName="ModelDB.MaterialType">
               <MappingFragment StoreEntitySet="MaterialTypes">
                 <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="IsLeafNode" ColumnName="IsLeafNode" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ParentID" ColumnName="ParentID" />
                 <ScalarProperty Name="GUID" ColumnName="GUID" />
@@ -635,8 +802,8 @@
           <EntitySetMapping Name="OrderDetails">
             <EntityTypeMapping TypeName="ModelDB.OrderDetail">
               <MappingFragment StoreEntitySet="OrderDetails">
+                <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="Size" ColumnName="Size" />
-                <ScalarProperty Name="Sex" ColumnName="Sex" />
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
                 <ScalarProperty Name="GUID" ColumnName="GUID" />
               </MappingFragment>

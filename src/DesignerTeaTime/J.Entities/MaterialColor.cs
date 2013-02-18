@@ -12,19 +12,21 @@ namespace J.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class MaterialType
+    public partial class MaterialColor
     {
-        public MaterialType()
+        public MaterialColor()
         {
-            this.Materials = new HashSet<Material>();
+            this.MaterialPictures = new HashSet<MaterialPicture>();
         }
     
         public string GUID { get; set; }
-        public string ParentID { get; set; }
-        public string Name { get; set; }
-        public Nullable<bool> IsLeafNode { get; set; }
+        public string MaterialID { get; set; }
+        public string ColorName { get; set; }
+        public string ColorCode { get; set; }
+        public bool IsDefault { get; set; }
         public sbyte State { get; set; }
     
-        public virtual ICollection<Material> Materials { get; set; }
+        public virtual Material Material { get; set; }
+        public virtual ICollection<MaterialPicture> MaterialPictures { get; set; }
     }
 }

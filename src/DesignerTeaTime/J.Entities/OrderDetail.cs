@@ -16,8 +16,8 @@ namespace J.Entities
     {
         public string GUID { get; set; }
         public string OrderID { get; set; }
-        public Nullable<sbyte> Sex { get; set; }
         public string Size { get; set; }
+        public Nullable<int> Number { get; set; }
     
         public virtual Order Order { get; set; }
     }

@@ -17,6 +17,7 @@ namespace J.Entities
         public Material()
         {
             this.DesignWorks = new HashSet<DesignWork>();
+            this.MaterialColors = new HashSet<MaterialColor>();
             this.MaterialPriceLogs = new HashSet<MaterialPriceLog>();
         }
     
@@ -24,9 +25,13 @@ namespace J.Entities
         public string TypeID { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
+        public string Description { get; set; }
+        public string Sizes { get; set; }
+        public int PictureNumber { get; set; }
         public sbyte State { get; set; }
     
         public virtual ICollection<DesignWork> DesignWorks { get; set; }
+        public virtual ICollection<MaterialColor> MaterialColors { get; set; }
         public virtual ICollection<MaterialPriceLog> MaterialPriceLogs { get; set; }
         public virtual MaterialType MaterialType { get; set; }
     }
