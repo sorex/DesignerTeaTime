@@ -21,6 +21,7 @@ namespace J.Entities
     
         public string GUID { get; set; }
         public string ParentID { get; set; }
+        public Nullable<int> Index { get; set; }
         public string Name { get; set; }
         public Nullable<bool> IsLeafNode { get; set; }
         public sbyte State { get; set; }

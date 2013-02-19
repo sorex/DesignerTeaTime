@@ -8,10 +8,8 @@
         <EntityTypeShape EntityType="ModelDB.Address" Width="2.125" PointX="15.875" PointY="1.25" />
         <EntityTypeShape EntityType="ModelDB.DesignWork" Width="2.375" PointX="11.625" PointY="8" />
         <EntityTypeShape EntityType="ModelDB.MaterialColor" Width="2" PointX="5.5" PointY="5.25" />
-        <EntityTypeShape EntityType="ModelDB.MaterialPicture" Width="2.125" PointX="5.375" PointY="1.125" />
         <EntityTypeShape EntityType="ModelDB.MaterialPriceLog" Width="2.25" PointX="5.25" PointY="13.625" />
         <EntityTypeShape EntityType="ModelDB.Material" Width="2.125" PointX="5.375" PointY="8.75" />
-        <EntityTypeShape EntityType="ModelDB.MaterialType" Width="2" PointX="0.875" PointY="9.625" />
         <EntityTypeShape EntityType="ModelDB.OrderDetail" Width="2.375" PointX="23.25" PointY="9.25" />
         <EntityTypeShape EntityType="ModelDB.Order" Width="3.375" PointX="18" PointY="7.375" />
         <EntityTypeShape EntityType="ModelDB.SingleLogin" Width="2.125" PointX="8.75" PointY="2" />
@@ -21,12 +19,14 @@
         <AssociationConnector Association="ModelDB.designworks_ibfk_2" />
         <AssociationConnector Association="ModelDB.orders_ibfk_1" />
         <AssociationConnector Association="ModelDB.materialcolors_ibfk_1" />
-        <AssociationConnector Association="ModelDB.materialpictures_ibfk_1" />
         <AssociationConnector Association="ModelDB.materialpricelogs_ibfk_1" ManuallyRouted="false" >
         </AssociationConnector>
-        <AssociationConnector Association="ModelDB.materials_ibfk_1" />
         <AssociationConnector Association="ModelDB.orderdetails_ibfk_1" />
         <AssociationConnector Association="ModelDB.singlelogin_ibfk_1" />
+        <EntityTypeShape EntityType="ModelDB.MaterialType" Width="2" PointX="1.25" PointY="8.875" />
+        <AssociationConnector Association="ModelDB.materials_ibfk_1" />
+        <EntityTypeShape EntityType="ModelDB.MaterialPicture" Width="2.375" PointX="5.375" PointY="1" />
+        <AssociationConnector Association="ModelDB.materialpictures_ibfk_1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
