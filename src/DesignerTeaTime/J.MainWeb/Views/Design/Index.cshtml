@@ -5,7 +5,12 @@
 		tinyMCE.init({
 			mode: "textareas",
 			theme: "advanced",
-			plugins: "advhr,advimage,advlink,advlist,autolink,autoresize,autosave,bbcode,contextmenu,directionality,emotions,example,example_dependency,fullpage,fullscreen,iespell,inlinepopups,insertdatetime,layer,legacyoutput,lists,media,nonbreaking,noneditable,pagebreak,paste,preview,print,save,searchreplace,spellchecker,style,tabfocus,table,template,visualblocks,visualchars,wordcount,xhtmlxtras",
+			plugins: "advhr,advimage,advlink,advlist,autolink,autoresize,bbcode,contextmenu,directionality,emotions,"
+				+ "example,example_dependency,fullpage,fullscreen,iespell,inlinepopups,insertdatetime,layer,legacyoutput,lists,media,"
+				+ "nonbreaking,noneditable,pagebreak,paste,preview,print,save,searchreplace,spellchecker,style,tabfocus,table,template,"
+				+ "visualblocks,visualchars,wordcount,xhtmlxtras",
+			//autosave
+			
 			language: "cn"
 		});
 	</script>
@@ -36,6 +41,7 @@
 			border: 5px solid #ccc;
 			border-radius: 5px;
 			padding: 5px;
+			margin-bottom: 5px;
 		}
 
 			.ValueGroup input[type="text"]
@@ -50,7 +56,11 @@
 
 }
 <div style="float: left; width: 400px; padding: 5px; position: relative;">
-	<div id="A" class="ValueGroup" style="height: 50px;">
+	<div class="ValueGroup">
+		<div id="MaterialsDiv">
+		</div>
+	</div>
+	<div class="ValueGroup">
 		<span style="width: 32px; height: 32px; display: inline-block; background-color: red;" onclick="ChangeColor(this);"></span>
 		<span style="width: 32px; height: 32px; display: inline-block; background-color: green;" onclick="ChangeColor(this);"></span>
 		<span style="width: 32px; height: 32px; display: inline-block; background-color: blue;" onclick="ChangeColor(this);"></span>
@@ -109,6 +119,31 @@
 
 
 @section scripts{
+	<script type="text/javascript">
+		var MaterialList = @Html.Raw(ViewBag.MaterialList)
+		$(function ()
+		{
+			UpdateMaterialsDiv();
+		});
+
+		function UpdateMaterialsDiv()
+		{
+			var $MaterialsDiv = $("#MaterialsDiv");
+			$MaterialsDiv.empty();
+			for (var i = 0; i < MaterialList.length; i++)
+			{
+				$temp = $('<input type="radio" ' + (i == 0 ? 'checked' : '') + ' id="Material_' + MaterialList[i].GUID + '" name="Material" value="' + MaterialList[i].GUID + '" /><label for="Material_' + MaterialList[i].GUID + '">' + MaterialList[i].Name + '</label>');
+				$MaterialsDiv.append($temp);
+			}
+			$MaterialsDiv.buttonset();
+		}
+
+		function UpdateColorsDiv()
+		{
+
+		}
+	</script>
+
 	<script type="text/javascript">
 		$(function ()
 		{
