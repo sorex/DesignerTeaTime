@@ -1,0 +1,21 @@
+﻿@{
+	ViewBag.Title = "Index";
+}
+
+<h2>原料管理</h2>
+
+<div>
+	<table style="width:100%;">
+		<tr>
+			<td style="width: 14%; text-align: right;">分类</td>
+			<td style="width: 36%;"><select>@foreach (var item in ViewBag.MaterialTypeSelectList)
+				{
+					<option value="@item.Value" selected="@item.Selected">@item.Text</option>
+				}</select></td>
+			<td style="width: 14%; text-align: right;">名称</td>
+			<td style="width: 36%;"></td>
+		</tr>
+	</table>
+</div>
+<div>
+</div>
