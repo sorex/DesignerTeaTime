@@ -13,8 +13,15 @@ namespace J.MainWeb.Controllers
 
 		public ActionResult Index()
 		{
+
 			return View();
 		}
+
+		public ActionResult IndexTest()
+		{
+			return View();
+		}
+
 
 		[HttpPost]
 		public ActionResult CreateDesignWorks()

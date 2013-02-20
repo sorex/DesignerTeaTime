@@ -15,7 +15,7 @@ namespace J.Entities
     public partial class MaterialPicture
     {
         public string GUID { get; set; }
-        public string MaterialColorID { get; set; }
+        public string MaterialID { get; set; }
         public string Name { get; set; }
         public Nullable<int> Index { get; set; }
         public string FileName { get; set; }
@@ -26,6 +26,6 @@ namespace J.Entities
         public Nullable<int> UploadWidth { get; set; }
         public Nullable<int> UploadHeight { get; set; }
     
-        public virtual MaterialColor MaterialColor { get; set; }
+        public virtual Material Material { get; set; }
     }
 }

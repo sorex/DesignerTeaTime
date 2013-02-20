@@ -14,11 +14,6 @@ namespace J.Entities
     
     public partial class MaterialColor
     {
-        public MaterialColor()
-        {
-            this.MaterialPictures = new HashSet<MaterialPicture>();
-        }
-    
         public string GUID { get; set; }
         public string MaterialID { get; set; }
         public string ColorName { get; set; }
@@ -27,6 +22,5 @@ namespace J.Entities
         public sbyte State { get; set; }
     
         public virtual Material Material { get; set; }
-        public virtual ICollection<MaterialPicture> MaterialPictures { get; set; }
     }
 }

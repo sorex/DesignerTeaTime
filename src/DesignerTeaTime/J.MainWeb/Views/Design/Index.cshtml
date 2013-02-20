@@ -33,7 +33,6 @@
 
 		.ValueGroup
 		{
-			width: 400px;
 			border: 5px solid #ccc;
 			border-radius: 5px;
 			padding: 5px;
@@ -50,56 +49,61 @@
 @section top{
 
 }
-<div id="Show1" class="Show" style="background: #FF0000 url('/Images/short-sleeved_T_shirt_front.png') no-repeat center center; z-index: 1;">
-	<div id="ShowImage1"></div>
-</div>
-<div id="Show2" class="Show" style="background: #FF0000 url('/Images/short-sleeved_T_shirt_back.png') no-repeat center center;">
-	<div id="ShowImage2"></div>
-</div>
-<div id="ChangeShow" style="width: 530px; height: 50px; text-align: center;">
-	<a href="javascript:ChangeImage('front');">正面</a> | <a href="javascript:ChangeImage('back');">反面</a>
-</div>
-<div id="A" class="ValueGroup" style="height: 50px;">
-	<span style="width: 32px; height: 32px; display: inline-block; background-color: red;" onclick="ChangeColor(this);"></span>
-	<span style="width: 32px; height: 32px; display: inline-block; background-color: green;" onclick="ChangeColor(this);"></span>
-	<span style="width: 32px; height: 32px; display: inline-block; background-color: blue;" onclick="ChangeColor(this);"></span>
-	<span style="width: 32px; height: 32px; display: inline-block; background-color: black;" onclick="ChangeColor(this);"></span>
-	<span style="width: 32px; height: 32px; display: inline-block; background-color: white;" onclick="ChangeColor(this);"></span>
-</div>
-<div id="B" class="ValueGroup" style="height: 150px;">
-	<input type="file" id="frontUpload" name="frontUpload" />
-	<input type="file" id="backUpload" name="backUpload" />
-</div>
-<div id="C" class="ValueGroup" style="height: 100px;">
-	<div id="salesGoalSlider"></div>
-	<div style="float: left; width: 170px;">
-		<span>销售目标：</span><span id="salesGoal">50</span><span>件</span><br />
-		<span>单件成本：</span><span id="basePrice">50.00</span><span>元/件</span><br />
-		<span>单件售价：</span><input type="text" id="sellingPrice" style="width: 60px" value="60.00" onchange="ComputerAnticipatedIncome();" /><span>元/件</span>
+<div style="float: left; width: 400px; padding: 5px; position: relative;">
+	<div id="A" class="ValueGroup" style="height: 50px;">
+		<span style="width: 32px; height: 32px; display: inline-block; background-color: red;" onclick="ChangeColor(this);"></span>
+		<span style="width: 32px; height: 32px; display: inline-block; background-color: green;" onclick="ChangeColor(this);"></span>
+		<span style="width: 32px; height: 32px; display: inline-block; background-color: blue;" onclick="ChangeColor(this);"></span>
+		<span style="width: 32px; height: 32px; display: inline-block; background-color: black;" onclick="ChangeColor(this);"></span>
+		<span style="width: 32px; height: 32px; display: inline-block; background-color: white;" onclick="ChangeColor(this);"></span>
 	</div>
-	<div style="float: right; width: 230px; text-align: right;" title="显示的是总收益，需要扣除支付宝的手续费用，付款1.2%手续费，打款0.5%手续费（最低1元，最高25元）。">
-		<span>您的预计收益：</span><br />
-		<span id="anticipatedIncome" style="font: bold 48px arial;">500</span><span>元</span>
+	<div id="B" class="ValueGroup" style="height: 150px;">
+		<input type="file" id="frontUpload" name="frontUpload" />
+		<input type="file" id="backUpload" name="backUpload" />
 	</div>
-</div>
-<div id="D" class="ValueGroup" style="height: 420px;">
-	<div title="给您的活动取个好辨识的标题吧。">
-		<span>活动标题：</span><input type="text" id="title" style="width: 320px;" />
-		<input type="button" onclick="test();" value="test" />
-	</div>
-	<div style="margin-top:5px;" title="您希望该活动的预售时长。">
-		<span>活动时长：</span>
-		<div id="longTime" style="display: inline-block;">
-			<input type="radio" id="time3" name="longTime" value="3" /><label for="time3">3天</label>
-			<input type="radio" id="time7" name="longTime" value="7" checked /><label for="time7">7天</label>
-			<input type="radio" id="time14" name="longTime" value="14" /><label for="time14">14天</label>
-			<input type="radio" id="time21" name="longTime" value="21" /><label for="time21">21天</label>
+	<div id="C" class="ValueGroup" style="height: 100px;">
+		<div id="salesGoalSlider"></div>
+		<div style="float: left; width: 170px;">
+			<span>销售目标：</span><span id="salesGoal">50</span><span>件</span><br />
+			<span>单件成本：</span><span id="basePrice">50.00</span><span>元/件</span><br />
+			<span>单件售价：</span><input type="text" id="sellingPrice" style="width: 60px" value="60.00" onchange="ComputerAnticipatedIncome();" /><span>元/件</span>
+		</div>
+		<div style="float: right; width: 230px; text-align: right;" title="显示的是总收益，需要扣除支付宝的手续费用，付款1.2%手续费，打款0.5%手续费（最低1元，最高25元）。">
+			<span>您的预计收益：</span><br />
+			<span id="anticipatedIncome" style="font: bold 48px arial;">500</span><span>元</span>
 		</div>
 	</div>
-	<div style="margin-top:5px;" title="给您的写点什么吧。它会显示到购买页面的说。">
-		<span>活动说明：</span><textarea id="description" style="height: 200px;"></textarea>
+	<div id="D" class="ValueGroup" style="height: 420px;">
+		<div title="给您的活动取个好辨识的标题吧。">
+			<span>活动标题：</span><input type="text" id="title" style="width: 320px;" />
+			<input type="button" onclick="test();" value="test" />
+		</div>
+		<div style="margin-top: 5px;" title="您希望该活动的预售时长。">
+			<span>活动时长：</span>
+			<div id="longTime" style="display: inline-block;">
+				<input type="radio" id="time3" name="longTime" value="3" /><label for="time3">3天</label>
+				<input type="radio" id="time7" name="longTime" value="7" checked /><label for="time7">7天</label>
+				<input type="radio" id="time14" name="longTime" value="14" /><label for="time14">14天</label>
+				<input type="radio" id="time21" name="longTime" value="21" /><label for="time21">21天</label>
+			</div>
+		</div>
+		<div style="margin-top: 5px;" title="给您的写点什么吧。它会显示到购买页面的说。">
+			<span>活动说明：</span><textarea id="description" style="height: 200px;"></textarea>
+		</div>
 	</div>
 </div>
+<div style="float: left; width: 580px; padding: 5px; position: relative;">
+	<div id="Show1" class="Show" style="background: #FF0000 url('/Images/short-sleeved_T_shirt_front.png') no-repeat center center; z-index: 1;">
+		<div id="ShowImage1"></div>
+	</div>
+	<div id="Show2" class="Show" style="background: #FF0000 url('/Images/short-sleeved_T_shirt_back.png') no-repeat center center;">
+		<div id="ShowImage2"></div>
+	</div>
+	<div id="ChangeShow" style="width: 530px; height: 50px; text-align: center;">
+		<a href="javascript:ChangeImage('front');">正面</a> | <a href="javascript:ChangeImage('back');">反面</a>
+	</div>
+</div>
+<div class="ui-helper-clearfix"></div>
 
 
 
@@ -148,15 +152,15 @@
 
 			$("#longTime").buttonset();
 
-			$("#body").divLayout([
-				{ id: "Show1", top: 0, left: 420 },
-				{ id: "Show2", top: 0, left: 420 },
-				{ id: "ChangeShow", top: 630, left: 420 },
-				{ id: "A", top: 0, left: 0 },
-				{ id: "B", top: 75, left: 0 },
-				{ id: "C", top: 250, left: 0 },
-				{ id: "D", top: 375, left: 0 }
-			]);
+			//$("#body").divLayout([
+			//	{ id: "Show1", top: 0, left: 420 },
+			//	{ id: "Show2", top: 0, left: 420 },
+			//	{ id: "ChangeShow", top: 630, left: 420 },
+			//	{ id: "A", top: 0, left: 0 },
+			//	{ id: "B", top: 75, left: 0 },
+			//	{ id: "C", top: 250, left: 0 },
+			//	{ id: "D", top: 375, left: 0 }
+			//]);
 		});
 
 		function ComputerAnticipatedIncome()

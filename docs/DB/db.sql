@@ -106,6 +106,7 @@ PRIMARY KEY (`GUID`)
 CREATE TABLE `MaterialTypes` (
 `GUID` varchar(200) NOT NULL,
 `ParentID` varchar(200) NULL,
+`Index` int NULL,
 `Name` varchar(200) NOT NULL COMMENT '类型名称',
 `IsLeafNode` bit NULL DEFAULT b'1' COMMENT '是否是叶子节点',
 `State` tinyint NOT NULL COMMENT '状态\r\n0：停用\r\n1：正常\r\n',
@@ -132,7 +133,7 @@ PRIMARY KEY (`GUID`)
 
 CREATE TABLE `MaterialPictures` (
 `GUID` varchar(200) NOT NULL,
-`MaterialColorID` varchar(200) NULL,
+`MaterialID` varchar(200) NULL,
 `Name` varchar(200) NULL,
 `Index` int NULL,
 `FileName` varchar(200) NOT NULL,
@@ -155,5 +156,5 @@ ALTER TABLE `DesignWorks` ADD FOREIGN KEY (`MaterialID`) REFERENCES `Materials` 
 ALTER TABLE `OrderDetails` ADD FOREIGN KEY (`OrderID`) REFERENCES `Orders` (`GUID`);
 ALTER TABLE `Orders` ADD FOREIGN KEY (`DesignWorkID`) REFERENCES `DesignWorks` (`GUID`);
 ALTER TABLE `MaterialColors` ADD FOREIGN KEY (`MaterialID`) REFERENCES `Materials` (`GUID`);
-ALTER TABLE `MaterialPictures` ADD FOREIGN KEY (`MaterialColorID`) REFERENCES `MaterialColors` (`GUID`);
+ALTER TABLE `MaterialPictures` ADD FOREIGN KEY (`MaterialID`) REFERENCES `Materials` (`GUID`);
 
