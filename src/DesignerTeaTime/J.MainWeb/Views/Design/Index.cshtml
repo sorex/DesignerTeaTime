@@ -60,7 +60,7 @@
 		<div id="MaterialsDiv">
 		</div>
 	</div>
-	<div class="ValueGroup">
+	<div id="MaterialColorsDiv" class="ValueGroup">
 		<span style="width: 32px; height: 32px; display: inline-block; background-color: red;" onclick="ChangeColor(this);"></span>
 		<span style="width: 32px; height: 32px; display: inline-block; background-color: green;" onclick="ChangeColor(this);"></span>
 		<span style="width: 32px; height: 32px; display: inline-block; background-color: blue;" onclick="ChangeColor(this);"></span>
@@ -120,19 +120,21 @@
 
 @section scripts{
 	<script type="text/javascript">
-		var MaterialList = @Html.Raw(ViewBag.MaterialList)
+		var Data = @Html.Raw(ViewBag.Data)
 		$(function ()
 		{
 			UpdateMaterialsDiv();
+			UpdateColorsDiv()
 		});
 
 		function UpdateMaterialsDiv()
 		{
 			var $MaterialsDiv = $("#MaterialsDiv");
 			$MaterialsDiv.empty();
-			for (var i = 0; i < MaterialList.length; i++)
+			for (var i = 0; i < Data.Materials.length; i++)
 			{
-				$temp = $('<input type="radio" ' + (i == 0 ? 'checked' : '') + ' id="Material_' + MaterialList[i].GUID + '" name="Material" value="' + MaterialList[i].GUID + '" /><label for="Material_' + MaterialList[i].GUID + '">' + MaterialList[i].Name + '</label>');
+				var tempdata = Data.Materials[i];
+				$temp = $('<input type="radio" ' + (i == 0 ? 'checked' : '') + ' id="Material_' + tempdata.GUID + '" name="Material" value="' + tempdata.GUID + '" /><label for="Material_' + tempdata.GUID + '">' + tempdata.Name + '</label>');
 				$MaterialsDiv.append($temp);
 			}
 			$MaterialsDiv.buttonset();
@@ -140,10 +142,27 @@
 
 		function UpdateColorsDiv()
 		{
+			var $MaterialColorsDiv = $("#MaterialColorsDiv");
+			$MaterialColorsDiv.empty();
+			for (var i = 0; i < Data.MaterialColors.length; i++)
+			{
+				var tempdata = Data.MaterialColors[i];
+				$temp = $('<span style="width: 32px; height: 32px; display: inline-block; background-color: ' + tempdata.ColorCode + ';" title="' + tempdata.ColorName + '" onclick="ChangeColor(this);"></span>');
+				if (tempdata.IsSelected)
+					$temp.addClass("ColorSelected");
+				$MaterialColorsDiv.append($temp);
+			}
+		}
+
+		function UpdatePicturesDiv()
+		{
 
 		}
-	</script>
 
+		function UpdateInfos()
+		{
+		}
+	</script>
 	<script type="text/javascript">
 		$(function ()
 		{
