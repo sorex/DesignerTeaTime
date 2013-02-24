@@ -191,6 +191,7 @@
     <Content Include="Static\modernizr\modernizr-2.6.2.js" />
     <Content Include="Static\site\css\reset.css" />
     <Content Include="Static\site\js\divLayout.js" />
+    <Content Include="Static\tiny_mce\jquery.tinymce.js" />
     <Content Include="Static\tiny_mce\langs\cn.js" />
     <Content Include="Static\tiny_mce\langs\en.js" />
     <Content Include="Static\tiny_mce\license.txt" />
