@@ -32,6 +32,21 @@ namespace J.MainWeb.Controllers
 			return View();
 		}
 
+		public ActionResult MaterialInfos(string MaterialID)
+		{
+			using (DBEntities db = new DBEntities())
+			{
+				var MaterialColors = (from c in db.MaterialColors
+									  where c.MaterialID == MaterialID
+									  select new { ColorName = c.ColorName, ColorCode = c.ColorCode, IsSelected = c.IsDefault }).ToList();
+				var MaterialPictures = (from p in db.MaterialPictures
+										where p.MaterialID == MaterialID
+										select new { p.GUID, p.Index, p.Name, p.FileName, p.Width, p.Height, p.Top, p.Left, p.UploadWidth, p.UploadHeight }).OrderBy(p => p.Index).ToList();
+				
+				return Content(JsonConvert.SerializeObject(new { MaterialColors, MaterialPictures }));
+			}
+		}
+
 		public ActionResult IndexTest()
 		{
 			return View();

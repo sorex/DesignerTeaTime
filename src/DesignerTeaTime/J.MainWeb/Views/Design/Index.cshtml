@@ -163,13 +163,13 @@
 
 @section scripts{
 	<script type="text/javascript">
-		var Data = @Html.Raw(ViewBag.Data) @";"
+		var Data = @Html.Raw(ViewBag.Data) ;
 		var CurrentMaterialID = "";
 		var CurrentColorCode = "";
 		$(function ()
 		{
 			UpdateMaterialsDiv();
-			UpdateMaterialColorsDiv()
+			UpdateMaterialColorsANDPicturesDiv()
 		});
 
 		function UpdateMaterialsDiv()
@@ -179,7 +179,7 @@
 			for (var i = 0; i < Data.Materials.length; i++)
 			{
 				var tempdata = Data.Materials[i];
-				$temp = $('<input type="radio" ' + (i == 0 ? 'checked' : '') + ' id="Material_' + tempdata.GUID + '" name="Material" value="' + tempdata.GUID + '" /><label for="Material_' + tempdata.GUID + '">' + tempdata.Name + '</label>');
+				$temp = $('<input type="radio" ' + (i == 0 ? 'checked' : '') + ' id="Material_' + tempdata.GUID + '" name="Material" value="' + tempdata.GUID + '" onclick="MaterialSelected(this);" /><label for="Material_' + tempdata.GUID + '">' + tempdata.Name + '</label>');
 				if (i == 0)
 					CurrentMaterialID = tempdata.GUID;
 				$MaterialsDiv.append($temp);
@@ -187,7 +187,22 @@
 			$MaterialsDiv.buttonset();
 		}
 
-		function UpdateMaterialColorsDiv()
+		function MaterialSelected(self)
+		{
+			$.ajax({
+				type: "GET",
+				url: "~/Design/MaterialInfos",
+				dataType: "json",
+				success: function (data)
+				{
+					Data.MaterialColors = data.MaterialColors;
+					Data.MaterialPictures = data.MaterialPictures;
+					UpdateMaterialColorsANDPicturesDiv();
+				}
+			});
+		}
+
+		function UpdateMaterialColorsANDPicturesDiv()
 		{
 			var $MaterialColorsDiv = $("#MaterialColorsDiv");
 			$MaterialColorsDiv.empty();
@@ -203,15 +218,7 @@
 
 				$MaterialColorsDiv.append($temp);
 			}
-		}
 
-		function ColorSelected(self)
-		{
-			
-		}
-
-		function UpdateMaterialPicturesDiv()
-		{
 			var $MaterialPicturesDiv = $("#MaterialPicturesDiv");
 			$MaterialPicturesDiv.empty();
 
@@ -221,11 +228,22 @@
 				//	<div id="ShowImage1"></div>
 				//</div>
 				var tempdata = Data.MaterialPictures[i];
-				$temp = $('<div id="Show_' + tempdata.Index + '" class="Show" style="width:' + tempdata.Width + 'px;height:' + tempdata.Height + 'px;background: #FF0000 url(\'/Images/Materials/' + CurrentMaterialID + '/' + CurrentColorCode + '/' + tempdata.FileName + '\') no-repeat center center;">' +
+				$temp = $('<div id="Show_' + tempdata.Index + '" class="Show" style="width:' + tempdata.Width + 'px;height:' + tempdata.Height + 'px;background: transparent url(\'/Images/Materials/' + CurrentMaterialID + '/' + CurrentColorCode + '/' + tempdata.FileName + '\') no-repeat center center;" data-fileName="' + tempdata.FileName + '">' +
 					+'<div id="ShowImage_' + tempdata.Index + '" style="position: relative;width:' + tempdata.UploadWidth + 'px;height:' + tempdata.UploadHeight + 'px;left:' + tempdata.Left + 'px;top:' + tempdata.Top + 'px;"></div>'
 					+ '</div>');
 				$MaterialPicturesDiv.append($temp);
 			}
+
+		}
+
+		function ColorSelected(self)
+		{
+			var $MaterialPicturesDiv = $("#MaterialPicturesDiv");
+			var $Shows = $("div[id^=Show_]", $MaterialPicturesDiv).each(function ()
+			{
+				var FileName = $(this).attr("data-fileName");
+				$(this).css("background-image", 'url(\'/Images/Materials/' + CurrentMaterialID + '/' + CurrentColorCode + '/' + tempdata.FileName + '\')');
+			});
 		}
 
 		function UpdateInfos()
