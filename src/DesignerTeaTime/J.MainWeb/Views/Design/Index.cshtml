@@ -59,7 +59,7 @@
 	</script>
 
 	<style type="text/css">
-		.Show
+		/*.Show
 		{
 			width: 530px;
 			height: 630px;
@@ -72,12 +72,12 @@
 				position: relative;
 				left: 155px;
 				top: 110px;
-			}
+			}*/
 
-			.Show:hover div
-			{
-				border: 2px solid #ccc;
-			}
+		.Show:hover div
+		{
+			border: 2px solid #ccc;
+		}
 
 		.ValueGroup
 		{
@@ -121,9 +121,9 @@
 			<span>单件成本：</span><span id="basePrice">50.00</span><span>元/件</span><br />
 			<span>单件售价：</span><input type="text" id="sellingPrice" style="width: 60px" value="60.00" onchange="ComputerAnticipatedIncome();" /><span>元/件</span>
 		</div>
-		<div style="float: right; width: 230px; text-align: right;" title="显示的是总收益，需要扣除支付宝的手续费用，付款1.2%手续费，打款0.5%手续费（最低1元，最高25元）。">
+		<div style="float: right; width: 210px; text-align: right;" title="显示的是总收益，需要扣除支付宝的手续费用，付款1.2%手续费，打款0.5%手续费（最低1元，最高25元）。">
 			<span>您的预计收益：</span><br />
-			<span id="anticipatedIncome" style="font: bold 48px arial;">500</span><span>元</span>
+			<span id="anticipatedIncome" style="font: bold 48px arial;">461.68</span><span>元</span>
 		</div>
 	</div>
 	<div id="D" class="ValueGroup" style="height: 420px;">
@@ -169,7 +169,20 @@
 		$(function ()
 		{
 			UpdateMaterialsDiv();
-			UpdateMaterialColorsANDPicturesDiv()
+			UpdateMaterialColorsANDPicturesDiv();
+
+			$("#salesGoalSlider").slider({
+				value: 50,
+				min: 10,
+				max: 500,
+				step: 10,
+				slide: function (event, ui)
+				{
+					$("#salesGoal").text(ui.value);
+					ComputerAnticipatedIncome();
+				}
+			});
+
 		});
 
 		function UpdateMaterialsDiv()
@@ -179,7 +192,7 @@
 			for (var i = 0; i < Data.Materials.length; i++)
 			{
 				var tempdata = Data.Materials[i];
-				$temp = $('<input type="radio" ' + (i == 0 ? 'checked' : '') + ' id="Material_' + tempdata.GUID + '" name="Material" value="' + tempdata.GUID + '" onclick="MaterialSelected(this);" /><label for="Material_' + tempdata.GUID + '">' + tempdata.Name + '</label>');
+				var $temp = $('<input type="radio" ' + (i == 0 ? 'checked' : '') + ' id="Material_' + tempdata.GUID + '" name="Material" value="' + tempdata.GUID + '" onclick="MaterialSelected(this);" /><label for="Material_' + tempdata.GUID + '">' + tempdata.Name + '</label>');
 				if (i == 0)
 					CurrentMaterialID = tempdata.GUID;
 				$MaterialsDiv.append($temp);
@@ -189,9 +202,10 @@
 
 		function MaterialSelected(self)
 		{
+			CurrentMaterialID = $(self).val();
 			$.ajax({
 				type: "GET",
-				url: "~/Design/MaterialInfos",
+				url: "/Design/MaterialInfos?MaterialID=" + CurrentMaterialID,
 				dataType: "json",
 				success: function (data)
 				{
@@ -209,7 +223,7 @@
 			for (var i = 0; i < Data.MaterialColors.length; i++)
 			{
 				var tempdata = Data.MaterialColors[i];
-				$temp = $('<span style="width: 32px; height: 32px; display: inline-block; background-color: ' + tempdata.ColorCode + ';" title="' + tempdata.ColorName + '" onclick="ColorSelected(this);"></span>');
+				var $temp = $('<span style="width: 32px; height: 32px; display: inline-block; background-color: #' + tempdata.ColorCode + ';" title="' + tempdata.ColorName + '" data-ColorCode="' + tempdata.ColorCode + '" onclick="ColorSelected(this);"></span>');
 				if (tempdata.IsSelected)
 				{
 					CurrentColorCode = tempdata.ColorCode;
@@ -224,31 +238,42 @@
 
 			for (var i = 0; i < Data.MaterialPictures.length; i++)
 			{
-				//<div id="Show1" class="Show" style="background: #FF0000 url('/Images/short-sleeved_T_shirt_front.png') no-repeat center center;">
-				//	<div id="ShowImage1"></div>
-				//</div>
 				var tempdata = Data.MaterialPictures[i];
-				$temp = $('<div id="Show_' + tempdata.Index + '" class="Show" style="width:' + tempdata.Width + 'px;height:' + tempdata.Height + 'px;background: transparent url(\'/Images/Materials/' + CurrentMaterialID + '/' + CurrentColorCode + '/' + tempdata.FileName + '\') no-repeat center center;" data-fileName="' + tempdata.FileName + '">' +
-					+'<div id="ShowImage_' + tempdata.Index + '" style="position: relative;width:' + tempdata.UploadWidth + 'px;height:' + tempdata.UploadHeight + 'px;left:' + tempdata.Left + 'px;top:' + tempdata.Top + 'px;"></div>'
+
+				var $temp = $('<div id="Show_' + tempdata.Index + '" class="Show" style="width:' + tempdata.Width + 'px;height:' + tempdata.Height + 'px;background: transparent url(\'/Images/Materials/' + CurrentMaterialID + '/' + CurrentColorCode + '/' + tempdata.FileName + '\') no-repeat center center;" data-fileName="' + tempdata.FileName + '" >'
+					+ '<div id="ShowImage_' + tempdata.Index + '" style="position: relative;width:' + tempdata.UploadWidth + 'px;height:' + tempdata.UploadHeight + 'px;left:' + tempdata.Left + 'px;top:' + tempdata.Top + 'px;"></div>'
 					+ '</div>');
 				$MaterialPicturesDiv.append($temp);
 			}
-
 		}
 
 		function ColorSelected(self)
 		{
+			CurrentColorCode = $(self).attr("data-ColorCode");
+
 			var $MaterialPicturesDiv = $("#MaterialPicturesDiv");
 			var $Shows = $("div[id^=Show_]", $MaterialPicturesDiv).each(function ()
 			{
 				var FileName = $(this).attr("data-fileName");
-				$(this).css("background-image", 'url(\'/Images/Materials/' + CurrentMaterialID + '/' + CurrentColorCode + '/' + tempdata.FileName + '\')');
+				$(this).css("background-image", 'url(\'/Images/Materials/' + CurrentMaterialID + '/' + CurrentColorCode + '/' + FileName + '\')');
 			});
 		}
 
-		function UpdateInfos()
+		function ComputerAnticipatedIncome()
 		{
+			var salesGoal = parseInt($("#salesGoal").text());
+			var sellingPrice = parseFloat($("#sellingPrice").val());
+			var basePrice = parseFloat($("#basePrice").text());
+			var anticipatedIncome = (salesGoal * (sellingPrice * 100000 * 0.988 - basePrice * 100000));
+			var tax = anticipatedIncome * 0.005;
+			if (tax < 1 * 100000)
+				tax = 1 * 00000;
+			else if (tax > 25 * 100000)
+				tax = 25 * 100000;
+			anticipatedIncome = (anticipatedIncome - tax) / 100000;
+			$("#anticipatedIncome").text(anticipatedIncome);
 		}
+
 	</script>
 	<script type="text/javascript">
 		$(function ()
@@ -279,17 +304,6 @@
 				}
 			});
 
-			$("#salesGoalSlider").slider({
-				value: 50,
-				min: 10,
-				max: 500,
-				step: 10,
-				slide: function (event, ui)
-				{
-					$("#salesGoal").text(ui.value);
-					ComputerAnticipatedIncome();
-				}
-			});
 
 			$("#longTime").buttonset();
 
@@ -303,15 +317,6 @@
 			//	{ id: "D", top: 375, left: 0 }
 			//]);
 		});
-
-		function ComputerAnticipatedIncome()
-		{
-			var salesGoal = parseInt($("#salesGoal").text());
-			var sellingPrice = parseFloat($("#sellingPrice").val());
-			var basePrice = parseFloat($("#basePrice").text());
-			var anticipatedIncome = (salesGoal * (sellingPrice * 100 - basePrice * 100)) / 100
-			$("#anticipatedIncome").text(anticipatedIncome);
-		}
 
 		function ChangeColor(element)
 		{
