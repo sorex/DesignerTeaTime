@@ -281,18 +281,20 @@
 			$(document).tooltip();
 
 			$("#frontUpload").uploadify({
+				'uploader': '/Home/UploadImage',
 				'buttonText': '选择正面图案',
 				'fileTypeDesc': '图片文件',					//文件类型描述
 				'fileTypeExts': '*.jpg; *.png',				//文件类型后缀
 				'onUploadSuccess': function (file, data, response)
 				{
 					var dataobj = JSON.parse(data);
-					$("#ShowImage1").css("background", "transparent url('/Files/Temp/" + dataobj.msg + "/" + file.name + "') no-repeat");
+					$("#ShowImage1").css("background-image", "url('/Files/Temp/" + dataobj.msg + "/" + file.name + "')");
 					//alert("文件名：" + file.name + "\n文件大小：" + file.size + "\nState(success或error)：" + dataobj.state + "\nmsg(GUID或错误信息)：" + dataobj.msg);
 				}
 			});
 
 			$("#backUpload").uploadify({
+				'uploader': '/Home/UploadImage',
 				'buttonText': '选择反面图案',
 				'fileTypeDesc': '图片文件',					//文件类型描述
 				'fileTypeExts': '*.jpg; *.png',				//文件类型后缀

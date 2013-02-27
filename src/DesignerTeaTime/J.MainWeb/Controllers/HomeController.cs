@@ -47,5 +47,32 @@ namespace J.MainWeb.Controllers
 			}
 		}
 
+		[HttpPost]
+		public ActionResult UploadImage()
+		{
+			HttpPostedFileBase file = Request.Files["Filedata"]; //获取单独文件的访问
+			var fileGuid = Guid.NewGuid().ToString();//生成随机的guid
+			try
+			{
+				if (file != null)
+				{
+					var uploadPath = Server.MapPath("~/Files") + "/Temp/" + fileGuid;
+					if (!Directory.Exists(uploadPath))
+					{ //判断上传的文件夹是否存在 
+						Directory.CreateDirectory(uploadPath);
+					}
+					file.SaveAs(uploadPath + '/' + file.FileName);
+					System.Drawing.Image img = System.Drawing.Image.FromFile(uploadPath + '/' + file.FileName);
+					
+					return Content(JsonConvert.SerializeObject(new { state = "success", msg = fileGuid, width = img.Width, height = img.Height }));
+				}
+				return Content(JsonConvert.SerializeObject(new { state = "error", msg = "文件不存在，请重新上传！" }));
+			}
+			catch (Exception e)
+			{
+				return Content(JsonConvert.SerializeObject(new { state = "error", msg = e.Message }));
+			}
+		}
+
 	}
 }

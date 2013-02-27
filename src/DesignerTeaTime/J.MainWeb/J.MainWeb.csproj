@@ -490,7 +490,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Temp\JQueryUI.cshtml" />
     <Content Include="Views\Temp\Index.cshtml" />
-    <Content Include="Static\uploadify\jquery.uploadify-3.1.min.js.map" />
+    <Content Include="Static\uploadify\jquery.uploadify-3.1.min.js.map">
+      <DependentUpon>jquery.uploadify-3.1.js</DependentUpon>
+    </Content>
     <Content Include="Views\Design\Index.cshtml" />
     <Content Include="Views\Design\IndexTest.cshtml" />
   </ItemGroup>
