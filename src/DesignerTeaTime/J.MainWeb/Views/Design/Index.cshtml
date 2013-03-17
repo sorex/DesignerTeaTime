@@ -17,7 +17,6 @@
 		tinyMCE.init({
 			// 常用参数
 			mode: "textareas",
-			elements: "xxx",
 			theme: "advanced",
 			skin: "default",
 			language: "cn",
@@ -59,20 +58,11 @@
 	</script>
 
 	<style type="text/css">
-		/*.Show
+		.Show div
 		{
-			width: 530px;
-			height: 630px;
+			border: 2px solid transparent;
 		}
 
-			.Show div
-			{
-				width: 213px;
-				height: 327px;
-				position: relative;
-				left: 155px;
-				top: 110px;
-			}*/
 
 		.Show:hover div
 		{
@@ -105,7 +95,7 @@
 	</div>
 	<div id="MaterialColorsDiv" class="ValueGroup">
 	</div>
-	<div id="B" class="ValueGroup" style="height: 150px;">
+	<div id="UploadImagesDiv" class="ValueGroup" style="height: 150px;">
 	</div>
 	<div id="C" class="ValueGroup" style="height: 100px;">
 		<div id="salesGoalSlider"></div>
@@ -162,7 +152,7 @@
 		$(function ()
 		{
 			UpdateMaterialsDiv();
-			UpdateMaterialColorsANDPicturesDiv();
+			UpdateMaterialColorsANDPicturesDivANDUploadImagesDiv();
 
 			$("#salesGoalSlider").slider({
 				value: 50,
@@ -206,12 +196,12 @@
 				{
 					Data.MaterialColors = data.MaterialColors;
 					Data.MaterialPictures = data.MaterialPictures;
-					UpdateMaterialColorsANDPicturesDiv();
+					UpdateMaterialColorsANDPicturesDivANDUploadImagesDiv();
 				}
 			});
 		}
 
-		function UpdateMaterialColorsANDPicturesDiv()
+		function UpdateMaterialColorsANDPicturesDivANDUploadImagesDiv()
 		{
 			var $MaterialColorsDiv = $("#MaterialColorsDiv");
 			$MaterialColorsDiv.empty();
@@ -229,17 +219,47 @@
 			}
 
 			var $MaterialPicturesDiv = $("#MaterialPicturesDiv");
+			var $UploadImagesDiv = $("#UploadImagesDiv");
 			$MaterialPicturesDiv.empty();
-
+			$UploadImagesDiv.empty();
 			for (var i = 0; i < Data.MaterialPictures.length; i++)
 			{
 				var tempdata = Data.MaterialPictures[i];
 
-				var $temp = $('<div id="Show_' + tempdata.Index + '" class="Show" style="width:' + tempdata.Width + 'px;height:' + tempdata.Height + 'px;background: transparent url(\'/Images/Materials/' + CurrentMaterialID + '/' + CurrentColorCode + '/' + tempdata.FileName + '\') no-repeat center center;" data-fileName="' + tempdata.FileName + '" >'
+				var $temp1 = $('<div id="Show_' + tempdata.Index + '" class="Show" style="width:' + tempdata.Width + 'px;height:' + tempdata.Height + 'px;background: transparent url(\'/Images/Materials/' + CurrentMaterialID + '/' + CurrentColorCode + '/' + tempdata.FileName + '\') no-repeat center center;" data-fileName="' + tempdata.FileName + '" >'
 					+ '<div id="ShowImage_' + tempdata.Index + '" style="position: relative;width:' + tempdata.UploadWidth + 'px;height:' + tempdata.UploadHeight + 'px;left:' + tempdata.Left + 'px;top:' + tempdata.Top + 'px;"></div>'
 					+ '</div>');
-				$MaterialPicturesDiv.append($temp);
+				$MaterialPicturesDiv.append($temp1);
+
+				//<input type="file" id="Upload_" name="Upload_" data-Index="" />
+				//<input type="hidden" id="UploadGUID_" data-Index="" />
+				//<input type="hidden" id="UploadFileName_" data-Index="" />
+				var $temp2 = $('<input type="file" id="Upload_' + tempdata.Index + '" name="Upload_' + tempdata.Index + '" data-Index="' + tempdata.Index + '" /><input type="hidden" id="UploadGUID_' + tempdata.Index + '" data-Index="' + tempdata.Index + '" /><input type="hidden" id="UploadFileName_' + tempdata.Index + '" data-Index="' + tempdata.Index + '" />');
+				$UploadImagesDiv.append($temp2);
+
+				(function () {
+					var index = tempdata.Index;
+
+					$("#Upload_" + index).uploadify({
+					'uploader': '/Home/UploadImage',
+					'buttonText': '选择图案' + tempdata.Index,
+					'fileTypeDesc': '图片文件',					//文件类型描述
+					'fileTypeExts': '*.jpg; *.png',				//文件类型后缀
+					'onUploadSuccess': function (file, data, response)
+					{
+						var dataobj = JSON.parse(data);
+						if (dataobj.state == 'success')
+						{
+							$("#UploadGUID_" + index).val(dataobj.msg);
+							$("#UploadFileName_" + index).val(file.name);
+							$("#ShowImage_" + index).css("background-image", "url('/Files/Temp/" + dataobj.msg + "/" + file.name + "')");
+							//alert("文件名：" + file.name + "\n文件大小：" + file.size + "\nState(success或error)：" + dataobj.state + "\nmsg(GUID或错误信息)：" + dataobj.msg);
+						}
+					}});
+				})();
 			}
+
+
 		}
 
 		function ColorSelected(self)
