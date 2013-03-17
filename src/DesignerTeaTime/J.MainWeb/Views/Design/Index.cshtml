@@ -104,15 +104,8 @@
 		</div>
 	</div>
 	<div id="MaterialColorsDiv" class="ValueGroup">
-		<span style="width: 32px; height: 32px; display: inline-block; background-color: red;" onclick="ChangeColor(this);"></span>
-		<span style="width: 32px; height: 32px; display: inline-block; background-color: green;" onclick="ChangeColor(this);"></span>
-		<span style="width: 32px; height: 32px; display: inline-block; background-color: blue;" onclick="ChangeColor(this);"></span>
-		<span style="width: 32px; height: 32px; display: inline-block; background-color: black;" onclick="ChangeColor(this);"></span>
-		<span style="width: 32px; height: 32px; display: inline-block; background-color: white;" onclick="ChangeColor(this);"></span>
 	</div>
 	<div id="B" class="ValueGroup" style="height: 150px;">
-		<input type="file" id="frontUpload" name="frontUpload" />
-		<input type="file" id="backUpload" name="backUpload" />
 	</div>
 	<div id="C" class="ValueGroup" style="height: 100px;">
 		<div id="salesGoalSlider"></div>
@@ -194,7 +187,9 @@
 				var tempdata = Data.Materials[i];
 				var $temp = $('<input type="radio" ' + (i == 0 ? 'checked' : '') + ' id="Material_' + tempdata.GUID + '" name="Material" value="' + tempdata.GUID + '" onclick="MaterialSelected(this);" /><label for="Material_' + tempdata.GUID + '">' + tempdata.Name + '</label>');
 				if (i == 0)
+				{
 					CurrentMaterialID = tempdata.GUID;
+				}
 				$MaterialsDiv.append($temp);
 			}
 			$MaterialsDiv.buttonset();
@@ -273,6 +268,8 @@
 			anticipatedIncome = (anticipatedIncome - tax) / 100000;
 			$("#anticipatedIncome").text(anticipatedIncome);
 		}
+
+		//function Update
 
 	</script>
 	<script type="text/javascript">
