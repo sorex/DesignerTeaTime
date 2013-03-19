@@ -17,14 +17,14 @@ namespace J.Entities
         public string GUID { get; set; }
         public string MaterialID { get; set; }
         public string Name { get; set; }
-        public Nullable<int> Index { get; set; }
+        public int Index { get; set; }
         public string FileName { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
-        public Nullable<int> Top { get; set; }
-        public Nullable<int> Left { get; set; }
-        public Nullable<int> UploadWidth { get; set; }
-        public Nullable<int> UploadHeight { get; set; }
+        public int Top { get; set; }
+        public int Left { get; set; }
+        public int UploadWidth { get; set; }
+        public int UploadHeight { get; set; }
     
         public virtual Material Material { get; set; }
     }

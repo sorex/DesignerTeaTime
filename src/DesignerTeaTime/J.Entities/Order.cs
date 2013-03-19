@@ -22,8 +22,8 @@ namespace J.Entities
         public string GUID { get; set; }
         public string UserID { get; set; }
         public string DesignWorkID { get; set; }
-        public sbyte State { get; set; }
-        public Nullable<sbyte> RefundState { get; set; }
+        public int State { get; set; }
+        public Nullable<int> RefundState { get; set; }
         public Nullable<System.DateTime> WaitBuyerPayTime { get; set; }
         public Nullable<System.DateTime> WaitSellerSendGoodsTime { get; set; }
         public Nullable<System.DateTime> WaitBuyerConfirmGoodsTime { get; set; }
@@ -42,10 +42,11 @@ namespace J.Entities
         public string ZipCode { get; set; }
         public string Mobile { get; set; }
         public string Phone { get; set; }
-        public Nullable<sbyte> PayType { get; set; }
+        public Nullable<int> PayType { get; set; }
         public string PayOrderNo { get; set; }
     
         public virtual DesignWork DesignWork { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual User User { get; set; }
     }
 }

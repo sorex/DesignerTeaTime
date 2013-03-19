@@ -18,6 +18,7 @@ namespace J.Entities
         {
             this.Addresses = new HashSet<Address>();
             this.DesignWorks = new HashSet<DesignWork>();
+            this.Orders = new HashSet<Order>();
             this.SingleLogins = new HashSet<SingleLogin>();
         }
     
@@ -25,13 +26,13 @@ namespace J.Entities
         public string LoginName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public string Alipay { get; set; }
         public string StageName { get; set; }
         public System.DateTime CreateTime { get; set; }
-        public sbyte State { get; set; }
+        public int State { get; set; }
     
         public virtual ICollection<Address> Addresses { get; set; }
         public virtual ICollection<DesignWork> DesignWorks { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<SingleLogin> SingleLogins { get; set; }
     }
 }

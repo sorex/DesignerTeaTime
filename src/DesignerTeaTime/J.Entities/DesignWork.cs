@@ -24,14 +24,14 @@ namespace J.Entities
         public string MaterialID { get; set; }
         public int SalesGoal { get; set; }
         public decimal BasePrice { get; set; }
-        public Nullable<decimal> SellingPrice { get; set; }
+        public decimal SellingPrice { get; set; }
         public System.DateTime StartTime { get; set; }
         public System.DateTime EndTime { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string Url { get; set; }
         public Nullable<int> SalesVolume { get; set; }
-        public Nullable<sbyte> State { get; set; }
+        public int State { get; set; }
         public Nullable<decimal> ProcurementCost { get; set; }
         public Nullable<decimal> ProductionCost { get; set; }
         public Nullable<decimal> SendCost { get; set; }

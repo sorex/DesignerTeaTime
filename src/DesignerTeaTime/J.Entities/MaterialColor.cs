@@ -19,7 +19,7 @@ namespace J.Entities
         public string ColorName { get; set; }
         public string ColorCode { get; set; }
         public bool IsDefault { get; set; }
-        public sbyte State { get; set; }
+        public int State { get; set; }
     
         public virtual Material Material { get; set; }
     }
