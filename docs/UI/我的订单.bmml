@@ -1,0 +1,30 @@
+<mockup version="1.0" skin="sketch" fontFace="微软雅黑" measuredW="1393" measuredH="600" mockupW="1193" mockupH="600">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="200" y="0" w="1000" h="600" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="-1"/>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::List" x="200" y="0" w="100" h="600" measuredW="100" measuredH="129" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>square</borderStyle>
+        <hasHeader>false</hasHeader>
+        <rowHeight>41</rowHeight>
+        <selectedIndex>2</selectedIndex>
+        <size>18</size>
+        <text>%u4E2A%u4EBA%u8D44%u6599%0A%u6211%u7684%u8BBE%u8BA1%0A%u6211%u7684%u8BA2%u5355</text>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::DataGrid" x="300" y="148" w="-1" h="-1" measuredW="1093" measuredH="68" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>square</borderStyle>
+        <hasHeader>false</hasHeader>
+        <hLines>true</hLines>
+        <text>%5Bx%5D%2C%u8BA2%u5355%u7F16%u53F7%uFF1AXXXXXXXXXXXXXXX%2C%u6210%u4EA4%u65F6%u95F4%uFF1A2013-03-26%2017%3A58%0A%u4EA7%u54C1%u6807%u9898%5Cr%u989C%u8272%26%u6570%u91CF%2C%2060.00%2C2%2C120.00%2C%20%u8BA2%u5355%u8BE6%u60C5%2C%u7B49%u5F85%u4ED8%u6B3E/%u5DF2%u4ED8%u6B3E/%u5DF2%u53D1%u8D27/%u5DF2%u5B8C%u6210/%u7B49%u5F85%u9000%u6B3E/%u9000%u6B3E%u6210%u529F%2C%u4ED8%u6B3E/%u786E%u8BA4%u6536%u8D27/%u7533%u8BF7%u9000%u6B3E%2C%u5907%u5FD8%0A%7B0L%2C%200R%2C%200R%2C%200C%7D</text>
+        <vLines>false</vLines>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::ComboBox" x="887" y="15" w="-1" h="-1" measuredW="86" measuredH="134" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>14</size>
+        <text>%u4EA4%u6613%u72B6%u6001%0A%u7B49%u5F85%u4ED8%u6B3E%0A%u5DF2%u4ED8%u6B3E%0A%u5DF2%u53D1%u8D27%0A%u5DF2%u5B8C%u6210%0A%u7B49%u5F85%u9000%u6B3E%0A%u9000%u6B3E%u6210%u529F</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

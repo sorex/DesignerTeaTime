@@ -1,0 +1,29 @@
+<mockup version="1.0" skin="sketch" fontFace="微软雅黑" measuredW="1251" measuredH="600" mockupW="1051" mockupH="600">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="200" y="0" w="1000" h="600" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="-1"/>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::List" x="200" y="0" w="100" h="600" measuredW="100" measuredH="129" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>square</borderStyle>
+        <hasHeader>false</hasHeader>
+        <rowHeight>41</rowHeight>
+        <selectedIndex>1</selectedIndex>
+        <size>18</size>
+        <text>%u4E2A%u4EBA%u8D44%u6599%0A%u6211%u7684%u8BBE%u8BA1%0A%u6211%u7684%u8BA2%u5355</text>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::DataGrid" x="300" y="148" w="-1" h="-1" measuredW="951" measuredH="65" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>square</borderStyle>
+        <hasHeader>false</hasHeader>
+        <hLines>true</hLines>
+        <text>%5Bx%5D%2C%u670D%u88C5%2C%u540D%u79F0%uFF1AXXXXXXXXXXXXXXX%2C%u8BBE%u8BA1%u65F6%u95F4%uFF1A2013-03-26%2017%3A58%2C%u622A%u6B62%u65F6%u95F4%uFF1A2013-03-26%2017%3A58%0A%u552E%u4EF760.00%2C%u9500%u552E%u91CF/%u76EE%u6807%u91CF32/30%2C%u5B9E%u9645%u6536%u76CA120.00%2C%u8BE6%u7EC6%u4FE1%u606F%2C%20%u9884%u552E%u4E2D/%u9884%u552E%u5931%u8D25/%u7B49%u5F85%u751F%u4EA7/%u7B49%u5F85%u53D1%u8D27/%u7B49%u5F85%u6536%u6B3E/%u4EA4%u6613%u5B8C%u6210%2C%u5907%u5FD8%0A%7B0L%2C%200R%2C%200R%2C%200C%7D</text>
+        <vLines>false</vLines>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::ComboBox" x="905" y="15" w="-1" h="-1" measuredW="82" measuredH="126" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%u8BBE%u8BA1%u72B6%u6001%0A%u9884%u552E%u4E2D%0A%u9884%u552E%u5931%u8D25%0A%u7B49%u5F85%u751F%u4EA7%0A%u7B49%u5F85%u53D1%u8D27%0A%u7B49%u5F85%u6536%u6B3E%0A%u4EA4%u6613%u5B8C%u6210</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
